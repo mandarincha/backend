@@ -53,7 +53,7 @@ func (c *SUsecase) IOtherUseCase() Usecase {
 func (c *SUsecase) INewsUsecase() INewsUseCase {
 	return c.connection[_NewsUseCase].(INewsUseCase)
 }
-func (c *SUsecase) IDoctorUseCase() IDoctorUsecase{
+func (c *SUsecase) IDoctorUseCase() IDoctorUsecase {
 	return c.connection[_DoctorUseCase].(IDoctorUsecase)
 
 }

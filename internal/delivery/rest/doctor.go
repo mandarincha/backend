@@ -17,7 +17,7 @@ func NewDoctorController(g *gin.RouterGroup,uc usecase.IDoctorUsecase,bot Bot.Bo
 		uc:uc,
 		bot:bot,
 	}
-	r:=g.Group("/doctors")
+	r:=g.Group("/doc")
 	r.GET("/getalldoctors",handler.GetAll)
 	r.GET("/getonedoctor",handler.GetOneByID)
 }
