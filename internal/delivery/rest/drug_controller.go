@@ -10,8 +10,8 @@ import (
 	"net/http"
 	"os"
 	
-	"backend/internal/delivery/html"
-	"backend/internal/domain"
+	"testDeployment/internal/delivery/html"
+	"testDeployment/internal/domain"
 )
 
 func (cr controller) DrugIndexHandler(c *gin.Context) {

@@ -9,9 +9,9 @@ import (
 
 const smtpServer = "smtp.gmail.com"
 const smtpPort = 587
-const smtpUsername = "something@example.com"
-const smtpPassword = "password"
-const subject = "email Verification "
+const smtpUsername = "curifyapp1@gmail.com"
+const smtpPassword = "wuyk nvub juvi ojzk"
+const subject = "Curify Verification "
 const body = "Your verification code is: "
 
 func GenerateVerificationCode() string {

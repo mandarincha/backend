@@ -1,7 +1,7 @@
 package rest
 
 import (
-	"backend/internal/domain"
+	"testDeployment/internal/domain"
 
 	"github.com/gin-gonic/gin"
 )

@@ -6,8 +6,8 @@ import (
 
 	"net/http"
 	"os"
-	"backend/internal/delivery/dto"
-	"backend/pkg/Bot"
+	"testDeployment/internal/delivery/dto"
+	"testDeployment/pkg/Bot"
 
 	"github.com/gin-gonic/gin"
 )

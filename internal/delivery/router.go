@@ -1,10 +1,10 @@
 package delivery
 
 import (
-	request "backend/internal/delivery/http"
-	"backend/internal/delivery/rest"
-	
-	"backend/pkg/Bot"
+	request "testDeployment/internal/delivery/http"
+	"testDeployment/internal/delivery/rest"
+	"testDeployment/internal/usecase"
+	"testDeployment/pkg/Bot"
 
 	"github.com/gin-gonic/gin"
 )
@@ -44,5 +44,10 @@ func SetUpHandlerV1(
 			group,
 			bot,
 			uc.INewsUsecase(),
+		)
+		rest.NewDoctorController(
+			group,
+			uc.IDoctorUseCase(),
+			bot,
 		)
 	}

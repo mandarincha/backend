@@ -1,10 +1,10 @@
 package rest
 
 import (
-	request "backend/internal/delivery/http"
-	"backend/internal/delivery/middleware"
-	"backend/internal/usecase"
-	"backend/pkg/Bot"
+	request "testDeployment/internal/delivery/http"
+	"testDeployment/internal/delivery/middleware"
+	"testDeployment/internal/usecase"
+	"testDeployment/pkg/Bot"
 
 	"github.com/gin-gonic/gin"
 )
@@ -30,6 +30,7 @@ func NewController(g *gin.RouterGroup,usecase usecase.Usecase, bot Bot.Bot,reque
 		save.GET("/", func(c *gin.Context) {
 			c.String(200, "Hello from save")
 		})
+		
 		drugs := save.Group("/drugs")
 		{
 			drugs.GET("/", controller.DrugIndexHandler)

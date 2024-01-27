@@ -1,9 +1,9 @@
 package rest
 
 import (
-	"backend/internal/usecase"
-	"backend/pkg/Bot"
-	"backend/pkg/utils"
+	"testDeployment/internal/usecase"
+	"testDeployment/pkg/Bot"
+	"testDeployment/pkg/utils"
 
 	"github.com/gin-gonic/gin"
 )
