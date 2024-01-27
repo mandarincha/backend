@@ -1,6 +1,7 @@
 package rest
 
 import (
+	"log"
 	"testDeployment/internal/usecase"
 	"testDeployment/pkg/Bot"
 
@@ -38,6 +39,7 @@ func (r *doctor) GetAll(c *gin.Context){
 }
 func (r *doctor) GetOneByID(c *gin.Context){
 	id:=c.Query("id")
+	log.Println(id)
 	doctor,err:=r.uc.GetOneByID(c,id)
 	if err!=nil{
 		c.JSON(200,gin.H{

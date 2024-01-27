@@ -20,6 +20,6 @@ bot: bot,
 func (u *doctorUseCase) GetAll(ctx context.Context) ([]*domain.DoctorByType,error){
 	return u.repo.GetAllDoctor(ctx)
 }
-func(u *doctorUseCase) GetOneByID(ctx context.Context,id string)  (*domain.DoctorWithType,error){
+func (u *doctorUseCase) GetOneByID(ctx context.Context,id string)  (*domain.DoctorWithType,error){
 	return u.repo.GetById(ctx,id)
 }
