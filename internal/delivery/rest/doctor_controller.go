@@ -23,8 +23,3 @@ func(c controller) CreateDoctor(ctx *gin.Context){
 	})
 }
 
-// func ( c controller) FillDoctorInfo(ctx *gin.Context){
-// 	var Doctor domain.Doctor
-// 	ctx.ShouldBindJSON(&Doctor)
-// 	id ,err:=
-// }

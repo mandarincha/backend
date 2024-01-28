@@ -3,6 +3,7 @@ package postgres
 import (
 	"context"
 	"database/sql"
+	"errors"
 	"testDeployment/internal/domain"
 	"testDeployment/internal/repository"
 	"testDeployment/pkg/Bot"
@@ -19,48 +20,63 @@ func NewDoctorRepository(db *sql.DB,bot Bot.Bot) repository.IDoctorRepository{
 	}
 }
 func (r *doctor) GetAllDoctor(ctx context.Context)([]*domain.DoctorByType,error){
-	var doctors []*domain.DoctorByType
+	 doctors:= []*domain.DoctorByType{}
 	rows,err:=r.db.QueryContext(ctx,GetAllTypes)
 	if err!=nil{
 		r.bot.SendErrorNotification(err)
 		return nil,err
 	}
 	for rows.Next(){
-		var tip *domain.DoctorByType
+		tip :=&domain.DoctorByType{}
 		rows.Scan(
 			&tip.Type,
 		)
 		doctors=append(doctors, tip)
 	}
 	for i,tip:=range doctors{
-		rows,err:=r.db.QueryContext(ctx,tip.Type)
+		rows,err:=r.db.QueryContext(ctx,GetDoctorByType,tip.Type)
 		if err!=nil{
 			r.bot.SendErrorNotification(err)
 			return nil,err
 		}
+		
 		for rows.Next(){
-			var doctor *domain.Doctor
+			 doctor:= &domain.DoctorWithType{}
 			rows.Scan(
 				&doctor.Id,
 				&doctor.Name,
 				&doctor.Workplace,
 				&doctor.WorkHours,
 				&doctor.Photo,
+				&doctor.PhoneNumber,
+				&doctor.Type,
 			)
+			
+			err=r.db.QueryRowContext(ctx,GetRating,doctor.Id).Scan(&doctor.Rating)
+			if err!=nil{
+				if errors.Is(err,sql.ErrNoRows){
+					continue
+				}else{
+					r.bot.SendErrorNotification(err)
+					return nil,err}
+				
+			}
+		
 			doctors[i].Doctor=append(doctors[i].Doctor,doctor)
 		}
 	}
 return doctors ,nil
 }
-func (r *doctor) GetById(ctx context.Context,id string) (*domain.DoctorWithType,error){
-	var doctor *domain.DoctorWithType
-	err:=r.db.QueryRowContext(ctx,GetDoctorById,id).Scan(
+func (r *doctor) GetById(ctx context.Context,name string) (*domain.DoctorWithType,error){
+	doctor:= &domain.DoctorWithType{}
+	err:=r.db.QueryRowContext(ctx,GetDoctorById,"%"+name+"%").Scan(
 		&doctor.Id,
 		&doctor.Name,
 		&doctor.Workplace,
 		&doctor.WorkHours,
 		&doctor.Photo,
 		&doctor.PhoneNumber,
+		&doctor.Type,
 	)
 	if err!=nil{
 		r.bot.SendErrorNotification(err)

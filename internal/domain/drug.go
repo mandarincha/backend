@@ -15,7 +15,7 @@ type DrugSearch struct{
 type DrugByType struct{
 	ID string `json:"id"`
 	Type string `json:"type"`
-	Drugs []DrugWithoutType
+	Drugs []Drug
 }
 type DrugWithoutType struct {
 	Id string `json:"id"`

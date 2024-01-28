@@ -42,9 +42,13 @@ type INewsUseCase interface{
 
 type IDoctorUsecase interface{
 	GetAll(ctx context.Context) ([]*domain.DoctorByType,error)
-	GetOneByID(ctx context.Context,id string)  (*domain.DoctorWithType,error)
+	GetOneByID(ctx context.Context,name string)  (*domain.DoctorWithType,error)
 }
 
+type IScheduleUseCase interface{
+	Create(ctx context.Context,schedule *domain.Schedule) error
+	GetAll(ctx context.Context,userId int)([]*domain.ScheduleResponse,error)
+}
 
 
 func NewUserUsecase(repo repository.Repo, bot Bot.Bot) Usecase {

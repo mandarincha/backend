@@ -4,6 +4,8 @@ type Doctor struct{
 	Name string `json:"name"`
 	Workplace string `json:"workplace"`
 	WorkHours string `json:"work_hours"`
+	PhoneNumber string `json:"phone_number"`
+	Rating float32 `json:"rating"`
 	Photo string `json:"photo"`
 }
 type DoctorWithType struct{
@@ -13,12 +15,13 @@ type DoctorWithType struct{
 	WorkHours string `json:"work_hours"`
 	Type string `json:"type"`
 	PhoneNumber string `json:"phone_number"`
+	Rating float32 `json:"rating"`
 	Photo string `json:"photo"`
 }
 type DoctorByType struct{
 	ID string `json:"id"`
 	Type string `json:"type"`
-	Doctor []*Doctor
+	Doctor []*DoctorWithType
 }
 type DoctorList struct{
 	TotalCount int `json:"totat_count"`

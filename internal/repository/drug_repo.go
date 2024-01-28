@@ -263,7 +263,7 @@ select path from photos where owner_id=$1
 			rows.Scan(&id)
 			ids=append(ids,id)
 		}
-		var drug domain.DrugWithoutType
+		var drug domain.Drug
 		for _,id:=range ids{
 			err = r.db.QueryRow(DrugSelect, id).Scan(
 				&drug.Id,
@@ -277,6 +277,21 @@ select path from photos where owner_id=$1
 					return nil, nil
 				}
 				return nil, err
+			}
+			typeSelect:=`
+			select type_name from type where drug_id=$1
+			`
+			row,err:=r.db.QueryContext(ctx,typeSelect,id)
+			if err!=nil{
+				if errors.Is(err , sql.ErrNoRows){
+					return nil, nil
+				}
+				return nil, err
+			}
+			for row.Next(){
+				var typo string
+				row.Scan(&typo)
+				drug.Type=append(drug.Type, typo)
 			}
 			rows,err:=r.db.QueryContext(ctx,photoSelect,id)
 			if err!=nil{

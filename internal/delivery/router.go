@@ -50,4 +50,10 @@ func SetUpHandlerV1(
 			uc.IDoctorUseCase(),
 			bot,
 		)
+		rest.NewSchedule(
+			group,
+			uc.IScheduleUseCase(),
+			bot,
+			request,
+		)
 	}
