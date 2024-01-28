@@ -36,16 +36,10 @@ func (h *schedule) Create(c *gin.Context){
 	s:=sessions.Default(c)
 	req:=&domain.Schedule{}
 	c.ShouldBindJSON(&req)
-	userId,ok:=s.Get("userId").(int)
-	if !ok{
-		c.JSON(500,gin.H{
-			"message":"no user id",
-		})
-	}
 	if req.Agree=="1"{
 		req.IsAgree=true
 	}
-	req.UserId=strconv.Itoa(userId)
+	req.UserId=strconv.Itoa(s.Get("userId").(int))
 	if req.IsAgree{
 		var NewMessage domain.NewMessage=domain.NewMessage{
 			Request: "give me summary",
