@@ -39,6 +39,10 @@ func (h *schedule) Create(c *gin.Context){
 	if req.Agree=="1"{
 		req.IsAgree=true
 	}
+	if s.Get("userId")==nil{
+		c.JSON(http.StatusNonAuthoritativeInfo, gin.H{"error": "auth first"})
+		return
+	}
 	req.UserId=strconv.Itoa(s.Get("userId").(int))
 	if req.IsAgree{
 		var NewMessage domain.NewMessage=domain.NewMessage{
