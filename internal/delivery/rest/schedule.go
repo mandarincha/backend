@@ -48,7 +48,7 @@ func (h *schedule) Create(c *gin.Context){
 	req.UserId=strconv.Itoa(userId)
 	if req.IsAgree{
 		var NewMessage domain.NewMessage=domain.NewMessage{
-			Request: "give me overview",
+			Request: "give me summary",
 			UserId: req.Id,
 			Name: "mirvohidkuch",
 		}
