@@ -53,7 +53,7 @@ func (h *schedule) Create(c *gin.Context){
 			Name: "mirvohidkuch",
 		}
 		// Make the JSON request
-	resp, err := h.http.Post("https://sololekum.up.railway.app/generate_response", NewMessage)
+	resp, err := h.http.Post("https://aihookah.up.railway.app/generate_response", NewMessage)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to make request"})
 		return
