@@ -42,7 +42,7 @@ type INewsUseCase interface{
 
 type IDoctorUsecase interface{
 	GetAll(ctx context.Context) ([]*domain.DoctorByType,error)
-	GetOneByID(ctx context.Context,name string)  (*domain.DoctorWithType,error)
+	GetOneByID(ctx context.Context,name string)  ([]*domain.DoctorWithType,error)
 }
 
 type IScheduleUseCase interface{

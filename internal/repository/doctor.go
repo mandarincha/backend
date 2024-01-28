@@ -5,5 +5,5 @@ import (
 )
 type IDoctorRepository interface{
 	GetAllDoctor(ctx context.Context)([]*domain.DoctorByType,error)
-	GetById(ctx context.Context,name string) (*domain.DoctorWithType,error)
+	GetById(ctx context.Context,name string) ([]*domain.DoctorWithType,error)
 }

@@ -67,9 +67,17 @@ func (r *doctor) GetAllDoctor(ctx context.Context)([]*domain.DoctorByType,error)
 	}
 return doctors ,nil
 }
-func (r *doctor) GetById(ctx context.Context,name string) (*domain.DoctorWithType,error){
-	doctor:= &domain.DoctorWithType{}
-	err:=r.db.QueryRowContext(ctx,GetDoctorById,"%"+name+"%").Scan(
+func (r *doctor) GetById(ctx context.Context,name string) ([]*domain.DoctorWithType,error){
+	doctors:= []*domain.DoctorWithType{}
+	rows,err:=r.db.QueryContext(ctx,GetDoctorById,"%"+name+"%")
+	if err!=nil{
+		r.bot.SendErrorNotification(err)
+		return nil,err
+	}
+	
+	for rows.Next(){
+	doctor:=&domain.DoctorWithType{}
+	rows.Scan(
 		&doctor.Id,
 		&doctor.Name,
 		&doctor.Workplace,
@@ -78,9 +86,9 @@ func (r *doctor) GetById(ctx context.Context,name string) (*domain.DoctorWithTyp
 		&doctor.PhoneNumber,
 		&doctor.Type,
 	)
-	if err!=nil{
-		r.bot.SendErrorNotification(err)
-		return nil,err
-	}
-	return doctor,nil
+
+	doctors=append(doctors, doctor)
+}
+	
+	return doctors,nil
 }
