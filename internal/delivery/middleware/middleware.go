@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"net/http"
+	
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
@@ -11,7 +12,6 @@ import (
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		session := sessions.Default(c)
-
 		// Check if user_id exists in the session
 		userID := session.Get("userId")
 		if userID == nil {
