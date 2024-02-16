@@ -33,7 +33,7 @@ func (c controller) SendMessage(ctx *gin.Context){
 	jsonData := NewMessage
 
 	// Make the JSON request
-	resp, err := c.http.Post("https://aihookah.up.railway.app/generate_response", jsonData)
+	resp, err := c.http.Post("https://sololekum.up.railway.app/generate_response", jsonData)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to make request"})
 		return
